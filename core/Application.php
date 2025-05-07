@@ -22,6 +22,7 @@ class Application{
     public function run(): void
     {
         try {
+            Route::setDefaultNamespace('\App\Controllers');//specifies default namespace for all route callbacks to avoid repitition
             Route::start();
         } catch (\Throwable $error) {
             // Fallback to your custom exception handler
