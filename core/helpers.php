@@ -1,5 +1,6 @@
 <?php
 declare (strict_types=1);
+
 use Pecee\SimpleRouter\SimpleRouter as Router;
 use \Pecee\Http\Request;
 use \Pecee\Http\Response;
@@ -18,7 +19,7 @@ use \Pecee\Http\Response;
  */
     function url(string $path = ''): string
     {
-        return Router::getUrl(trim($path, '/'));
+        return  Router::getUrl(trim($path, '/')) ?? '';
     }
 
 /**
@@ -27,7 +28,7 @@ use \Pecee\Http\Response;
  */
     function route(string $name, array $params = []): string
     {
-        return Router::route($name, $params);
+        return  Router::getUrl($name, $params) ?? '';
     }
 
 /**
@@ -42,29 +43,6 @@ use \Pecee\Http\Response;
         response()->redirect($url);
     }
 
-/*
-|--------------------------------------------------------------------------
-| Request & Response
-|--------------------------------------------------------------------------
-| These wrap SimpleRouter's internal request/response objects,
-| giving you access to HTTP data and input helpers.
-*/
-
-/**
- * Access the current request object (headers, method, input, etc.).
- */
-    function request(): Request
-    {
-        return Router::request();
-    }
-
-/**
- * Access the response object (headers, redirects, status codes).
- */
-    function response(): Response
-    {
-        return Router::response();
-    }
 
 /**
  * Get input data from the request (GET or POST).

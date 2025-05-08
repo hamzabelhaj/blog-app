@@ -1,6 +1,6 @@
 <?php
 namespace Core;
-use Pecee\SimpleRouter\SimpleRouter as Route;
+use Pecee\SimpleRouter\SimpleRouter as Router;
 use Core\Exceptions\ExceptionHandler;
 
 
@@ -22,11 +22,11 @@ class Application{
     public function run(): void
     {
         try {
-            Route::setDefaultNamespace('\App\Controllers');//specifies default namespace for all route callbacks to avoid repitition
-            Route::start();
+            Router::setDefaultNamespace('\App\Controllers');//specifies default namespace for all route callbacks to avoid repitition
+            Router::start();
         } catch (\Throwable $error) {
             // Fallback to your custom exception handler
-            (new ExceptionHandler())->handleError($error);
+            (new ExceptionHandler())->handleError(Router::request(), $error);
         }
     }
 

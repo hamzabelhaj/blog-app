@@ -7,6 +7,7 @@ use Pecee\Http\Request;
 use Pecee\SimpleRouter\Exceptions\NotFoundHttpException;
 
 
+
 class ExceptionHandler
 {
     //handle Routes errors
@@ -15,6 +16,7 @@ class ExceptionHandler
 
         if ($request->getUrl()->contains('/api')) {
 
+            
             response()->json([
                 'error' => $error->getMessage(),
                 'code' => $error->getCode(),
