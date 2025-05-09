@@ -5,17 +5,19 @@
 use App\Controllers\DashboardController;
 use Core\Middleware\CsrfVerifier;
 use Core\Middleware\AuthMiddleware;
-use Pecee\SimpleRouter\SimpleRouter as Route;
+use Pecee\SimpleRouter\SimpleRouter as Router;
 
 
-Route::get('/', 'HomeController@index'); //accesses Home Controller and invokes index funtion
+Router::get('/', 'HomeController@index')->name('home');; //accesses Home Controller and invokes index funtion
 
-Route::get('/users', 'UserController@index');
+Router::get('/users', 'UserController@index')->name('users');;
 
-Route::group(['middleware' => [CsrfVerifier::class]], function () {
-    Route::post('/users/store', 'UserController@store');
-});
+Router::get('/users/db-test', 'UserController@store')->name('store');;
 
-Route::group(['middleware' => [AuthMiddleware::class]], function () {
-    Route::get('/dashboard', 'DashboardController@index');
+/*Router::group(['middleware' => [CsrfVerifier::class]], function () {
+    Router::post('/users/store', 'UserController@store');
+});*/
+
+Router::group(['middleware' => [AuthMiddleware::class]], function () {
+    Router::get('/dashboard', 'DashboardController@index');
 });

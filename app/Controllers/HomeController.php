@@ -14,7 +14,6 @@ class HomeController extends Controller
 
     public function index(): void
     {
-
         $template = new Engine('../app/Views');
         echo $template->render('home');
     }

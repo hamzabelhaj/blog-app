@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use League\Plates\Engine;
+use Core\Database;
 
 class UserController
 {
@@ -18,6 +19,11 @@ class UserController
 
     public function store(): void
     {
-        // Handle form submission
+        $pdo = Database::connection();
+        $stmt = $pdo->query('SELECT NOW()');
+        $currentTime = $stmt->fetchColumn();
+
+        echo "✅ Database connection successful!<br>";
+        echo "Current DB time: " . $currentTime;
     }
 }

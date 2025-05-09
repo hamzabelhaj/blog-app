@@ -17,7 +17,7 @@ define('CONFIG_PATH', ROOT_PATH . '/config');
 
 // Database Config
 define('DB_TYPE', 'mysql');
-define('DB_HOST', '127.0.0.1');
+define('DB_HOST', 'localhost');
 define('DB_NAME', 'blog');
 define('DB_USER', 'root');
 define('DB_PASS', '');
