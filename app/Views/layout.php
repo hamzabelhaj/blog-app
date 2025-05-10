@@ -34,12 +34,12 @@
                             <a class="nav-link" href="<?= url('/') ?>">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= url('/register.php') ?>">
+                            <a class="nav-link" href="<?= url('/register') ?>">
                                 <i class="bi bi-person-plus"></i> Sign Up
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= url('/login.php') ?>">
+                            <a class="nav-link" href="<?= url('/login') ?>">
                                 <i class="bi bi-box-arrow-in-right"></i> Login
                             </a>
                         </li>
@@ -50,12 +50,12 @@
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
 
                                 <li>
-                                    <a class="dropdown-item" href="<?= url('/admin/posts/index.php') ?>">
+                                    <a class="dropdown-item" href="<?= url('/dashboard') ?>">
                                         Dashboard
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item text-danger" href="<?= url('/logout.php') ?>">
+                                    <a class="dropdown-item text-danger" href="<?= url('/logout') ?>">
                                         <i class="bi bi-box-arrow-left"></i>
                                         Logout
                                     </a>

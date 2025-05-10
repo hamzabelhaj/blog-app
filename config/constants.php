@@ -1,10 +1,7 @@
 <?php
 
 //base URL
-define('PROTOCOL', '//');
-define('DOMAIN', $_SERVER['HTTP_HOST']);
-define('ROOT_FOLDER', str_replace('public', '', dirname($_SERVER['SCRIPT_NAME'])));
-define('BASE_URL', PROTOCOL . DOMAIN . ROOT_FOLDER);
+define('BASE_URL_PATH', dirname($_SERVER['SCRIPT_NAME']));// ex: /blog-app/public
 
 // Paths relative to the root directory
 define('ROOT_PATH', realpath(__DIR__ . '/../'));

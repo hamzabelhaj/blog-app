@@ -16,12 +16,11 @@ use \Pecee\Http\Response;
 
 /**
  * Generate a full URL to a given path.
- * Example: url('users') → http://localhost/my-app/users
+ * Example: url('users') → http://localhost/my-app/public/users
  */
 function url(string $path = ''): string
 {
-    $basePath = dirname($_SERVER['SCRIPT_NAME']); // e.g. /blog-app/public
-    return rtrim($basePath, '/') . '/' . ltrim($path, '/');
+    return rtrim(BASE_URL_PATH, '/') . '/' . ltrim($path, '/');
 }
 
 /**

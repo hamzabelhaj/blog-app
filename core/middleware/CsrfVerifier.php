@@ -15,7 +15,7 @@ class CsrfVerifier implements IMiddleware
             $sessionToken = $_SESSION['csrf_token'] ?? '';
 
             if ($token !== $sessionToken) {
-                http_response_code(403);
+                http_response_code(403); // forbidden
                 exit('Invalid CSRF token');
             }
         }
