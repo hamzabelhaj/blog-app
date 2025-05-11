@@ -15,10 +15,6 @@ class RegisterController extends Controller
         
         header('Content-Type: application/json');
 
-        error_log(print_r($_POST, true));
-
-
-
         $username = trim($_POST['username']);
         $email = trim($_POST['email']);
         $password = $_POST['password'];

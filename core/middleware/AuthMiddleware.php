@@ -16,10 +16,8 @@ class AuthMiddleware implements IMiddleware
 
     public function handle(Request $request): void
     {
-        session_start();
-
         if (!isset($_SESSION['user_id'])) { //if user is not logged in
-            header('Location: /login');
+            header('Location:' . url('login'));
             exit;
         } 
         // If role check is required(normal user or admin)

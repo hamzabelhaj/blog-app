@@ -11,10 +11,8 @@ class GuestMiddleware implements IMiddleware
 {
     public function handle(Request $request): void
     {
-        session_start();
-
         if (isset($_SESSION['user_id'])) {
-            header('Location: /dashboard');
+            header('Location: ' . url());
             exit;
         }
     }
