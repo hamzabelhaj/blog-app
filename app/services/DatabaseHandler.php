@@ -6,9 +6,9 @@ namespace App\Services;
 
 use PDO;
 use PDOException;
-use App\Config\Database;
+use Config\Database;
 
-class DB
+class DatabaseHandler
 {
     protected PDO $pdo;
 
@@ -22,7 +22,8 @@ class DB
         try {
             $stmt = $this->pdo->prepare($query);
             $stmt->execute($params);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $records;
         } catch (PDOException $e) {
             error_log("Select Error: " . $e->getMessage());
             return [];
@@ -62,14 +63,4 @@ class DB
         }
     }
 
-    public function find(string $query, array $params = []): ?array
-    {
-        $result = $this->select($query, $params);
-        return $result[0] ?? null;
-    }
-
-    public function raw(): PDO
-    {
-        return $this->pdo;
-    }
 }

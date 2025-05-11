@@ -79,6 +79,13 @@
         <p>&copy; <?= date('Y') ?> | Blog App</p>
     </footer>
 
+    <script>
+        const HOME_URL = "<?= url('/') ?>";
+        const LOGIN_URL = "<?= url('login') ?>";
+        const REGISTER_URL = "<?= url('register') ?>";
+       
+    </script>
+
     <!-- jQuery (required for Bootstrap JS and your own scripts using jQuery) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 

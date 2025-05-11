@@ -46,16 +46,6 @@ function redirect(string $url, int $code = null): void
 
 
 /**
- * Get input data from the request (GET or POST).
- * Example: input('email')
- */
-function input(string $key = null)
-{
-    $data = request()->getInputHandler()->all();
-    return $key ? ($data[$key] ?? null) : $data;
-}
-
-/**
  * Check if the current request method is POST.
  */
 function is_post(): bool

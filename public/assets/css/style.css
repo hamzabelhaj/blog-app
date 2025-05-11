@@ -52,11 +52,13 @@ footer p{
     background-color: #8b8f94;
 }
 
-footer {}
+main .container #register-form {
+
+}
+
 
 @media (max-width: 991px) {
     .navbar .navbar-nav .nav-item .dropdown-menu {
         margin-top: 0;
-
     }
 }
