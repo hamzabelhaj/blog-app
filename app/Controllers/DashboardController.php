@@ -1,24 +1,46 @@
 <?php
 
+/**
+ * DashboardController Class
+ * Handles rendering of the dashboard view
+ */
+
 declare(strict_types=1);
 
 namespace App\Controllers;
 
-use Core\Controller;
-use League\Plates\Engine;
+use App\Controllers\BaseController;
 
-
-
-class DashboardController extends Controller
+class DashboardController extends BaseController
 {
-
-    public function index(): void
+    /**
+     * Renders dashboard layout with the specified subview and data.
+     *
+     * @param string|null $subview  The path to the specific dashboard subview to load.
+     * @param array|null  $data     Additional data to pass to the view.
+     *
+     * @return void
+     */
+    public function renderDashboard(?string $subview = null, ?array $data = []): void
     {
+        $user = $_SESSION['user'] ?? null;
+        $role = $user['role'] ?? null;
+        $isAdmin = ($role === 'admin');
+        $isEditor = in_array($role, ['admin', 'editor']);
+
+        $initialData = [
+            'user' => $user,
+            'isAdmin' => $isAdmin,
+            'isEditor' => $isEditor,
+        ];
+
+        $data = array_merge($initialData, $data);
+
         $this->view(
-            'dashboard',
+            'dashboard/layout',
             [
-                'title' => 'dashboard',
-                'csrf_token' => $_SESSION['csrf_token'] ?? ''
+                'subView' => $subview,
+                'data' => $data
             ]
         );
     }

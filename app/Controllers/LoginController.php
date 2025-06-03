@@ -1,26 +1,30 @@
 <?php
 
+/**
+ * LoginController Class
+ * Handles user login.
+ */
+
 namespace App\Controllers;
 
-
-use Core\Controller;
-use App\Modules\UserModule;
-use Config\Database;
-use League\Plates\Engine;
+use App\Controllers\BaseController;
+use App\Models\UserModel;
 use Respect\Validation\Validator as v;
 
-class LoginController extends Controller
+class LoginController extends BaseController
 {
+    /**
+     * Logs in users
+     *
+     * @return void
+     */
     public function loginUser(): void
     {
         header('Content-Type: application/json');
-
-        $email = trim($_POST['email']);
+        $email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
         $password = $_POST['password'];
-
         $error = '';
-
-        // Empty input
+        //validate email and password
         if (!v::notEmpty()->validate($email) || !v::notEmpty()->validate($password)) {
             $error = 'Please enter your email and password.';
             //invalid email format
@@ -33,26 +37,35 @@ class LoginController extends Controller
             echo json_encode(['error' => $error]);
             return;
         }
-        $user = new UserModule();
+        $user = new UserModel();
         $userData = $user->getUserByEmail($email);
-        if (!$user->exists($email) || !password_verify($password, $userData['password'])) {
-            http_response_code(401); //unauthorized
+        //check for invalid credentials
+        if (!$user->getUser($email) || !password_verify($password, $userData['password'])) {
+            http_response_code(401);
             echo json_encode(['error' => 'Invalid credentials.']);
             return;
         }
-        $_SESSION['user_id'] = $userData['id'];
-        $_SESSION['username'] = $userData['username'];
-        $_SESSION['email'] = $userData['email'];
+        $_SESSION['user'] = [
+            'id' => $userData['id'],
+            'username' => $userData['username'],
+            'email' => $userData['email'],
+            'role' => $userData['role']
+        ];
         echo json_encode(['success' => true]);
     }
 
-    public function index(): void
+    /**
+     * 
+     * Renders login view
+     *
+     * @return void
+     */
+    public function renderLoginView(): void
     {
         $this->view(
-            'users/login',
+            'login',
             [
-                'title' => 'login',
-                'csrf_token' => $_SESSION['csrf_token'] ?? ''
+                'title' => 'Login Page',
             ]
         );
     }

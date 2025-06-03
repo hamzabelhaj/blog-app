@@ -1,23 +1,36 @@
 <?php
-//helper class for reusable db querries
+
+/**
+ * DatabaseHandler class
+ * 
+ * Provides reusable methods for executing database operations such as 
+ * SELECT, INSERT, UPDATE, and DELETE using prepared statements.
+ */
+
 declare(strict_types=1);
 
 namespace App\Services;
 
 use PDO;
 use PDOException;
-use Config\Database;
+use App\Services\Database;
 
-class DatabaseHandler
+class DatabaseHandler extends Database
 {
     protected PDO $pdo;
 
     public function __construct()
     {
-        $this->pdo = Database::connection();
+        $this->pdo = $this->connection();
     }
-
-    public function select(string $query, array $params = []): array
+    /**
+     * Executes a SELECT query and returns the fetched results.
+     *
+     * @param string $query   The SQL SELECT statement
+     * @param array|null $params Optional parameters for the prepared statement
+     * @return array Result set as an associative array, or empty array on failure
+     */
+    public function select(string $query, ?array $params = []): array
     {
         try {
             $stmt = $this->pdo->prepare($query);
@@ -29,7 +42,13 @@ class DatabaseHandler
             return [];
         }
     }
-
+    /**
+     * Executes an INSERT query.
+     *
+     * @param string $query   The SQL INSERT statement
+     * @param array $params   Parameters for the prepared statement
+     * @return bool Success status
+     */
     public function insert(string $query, array $params = []): bool
     {
         try {
@@ -41,6 +60,13 @@ class DatabaseHandler
         }
     }
 
+    /**
+     * Executes an UPDATE query.
+     *
+     * @param string $query   The SQL UPDATE statement
+     * @param array $params   Parameters for the prepared statement
+     * @return bool Success status
+     */
     public function update(string $query, array $params = []): bool
     {
         try {
@@ -51,7 +77,13 @@ class DatabaseHandler
             return false;
         }
     }
-
+    /**
+     * Executes a DELETE query.
+     *
+     * @param string $query   The SQL DELETE statement
+     * @param array $params   Parameters for the prepared statement
+     * @return bool Success status
+     */
     public function delete(string $query, array $params = []): bool
     {
         try {
@@ -62,5 +94,4 @@ class DatabaseHandler
             return false;
         }
     }
-
 }

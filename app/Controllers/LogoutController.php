@@ -1,19 +1,19 @@
 <?php
 
+/**
+ * LogoutController Class
+ * Handles user logout.
+ */
+
 namespace App\Controllers;
-
-
-use Core\Controller;
-use App\Modules\UserModule;
-use Config\Database;
-use League\Plates\Engine;
-use Respect\Validation\Validator as v;
-
-
 
 class LogoutController
 {
-
+    /**
+     * logs user out
+     * 
+     * @return void
+     */
     public function logoutUser(): void
     {
         session_unset();
